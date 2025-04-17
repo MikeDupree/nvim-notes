@@ -12,11 +12,39 @@ function M.setup()
 		end)
 	end, {})
 
+	--
+	-- Opens the notes view
+	--
 	vim.api.nvim_create_user_command("SearchNotes", function()
 		require("telescope.builtin").find_files({
 			prompt_title = "Search Notes",
 			cwd = config.get_notes_dir(),
 		})
+	end, {})
+
+	vim.api.nvim_create_user_command("ViewNotes", function()
+		local notes_directory = config.get_notes_dir()
+
+		-- Open a new tab (isolated view)
+		vim.cmd("tabnew")
+
+		-- Set up floating window style
+		-- Left pane: Neo-tree scoped to notes dir
+		vim.cmd("wincmd h")
+		vim.cmd("Neotree dir=" .. notes_directory .. " reveal left")
+
+		-- Right pane: empty buffer or default note
+		vim.cmd("wincmd l")
+		vim.cmd("enew") -- This could open a specific note if we want?
+
+		vim.t[vim.api.nvim_get_current_tabpage()].tabname = "Notes"
+	end, {})
+
+	--
+	-- Closes the notes view
+	--
+	vim.api.nvim_create_user_command("CloseNotes", function()
+		vim.cmd("tabclose")
 	end, {})
 end
 
