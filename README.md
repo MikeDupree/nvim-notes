@@ -13,6 +13,7 @@ A simple and fast Neovim plugin to manage your personal notes — from *anywhere
 
 - `:NewNote` — Prompt for a note title and open it instantly
 - `:SearchNotes` — Use Telescope to fuzzy find notes
+- `:ViewNotes` – Open a popup with Neo-tree on the left and a file explorer on the right, showing the notes directory.
 - Notes are stored in a single directory (or whatever you configure)
 - Easy to use from *any Neovim session*, no need to open the notes dir directly
 
